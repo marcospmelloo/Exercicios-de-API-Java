@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name="livro")
@@ -33,6 +34,9 @@ public class Livro {
     @ManyToOne
     @JoinColumn(name = "id_editora")
     private Editora editora;
+
+    @OneToMany(mappedBy = "livro")
+    private List<Avaliacao> avaliacoes;
 
     public Long getId() {
         return id;
