@@ -30,7 +30,48 @@ public class Curso {
     @JoinTable(name = "curso_aluno",
     joinColumns = @JoinColumn(name = "id_curso"),
     inverseJoinColumns = @JoinColumn(name = "id_aluno"))
+    private List<Aluno> alunos;
 
     @OneToMany(mappedBy = "curso")
     private List<Topico> topicos;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public List<Topico> getTopicos() {
+        return topicos;
+    }
+
+    public void setTopicos(List<Topico> topicos) {
+        this.topicos = topicos;
+    }
 }
