@@ -1,7 +1,9 @@
 package org.serratec.exercicio_curso_aluno.controller;
 
 import jakarta.validation.Valid;
+import org.serratec.exercicio_curso_aluno.domain.Curso;
 import org.serratec.exercicio_curso_aluno.domain.Topico;
+import org.serratec.exercicio_curso_aluno.repositories.CursoRepository;
 import org.serratec.exercicio_curso_aluno.repositories.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ public class TopicoController {
     @Autowired
     private TopicoRepository topicoRepository;
 
+    @Autowired
+    private CursoRepository cursoRepository;
+
     @GetMapping
     public ResponseEntity<List<Topico>> listarTopico(){
         List<Topico> topicos = topicoRepository.findAll();
@@ -25,12 +30,9 @@ public class TopicoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Topico> buscarPorId(@PathVariable Long id){
-        Optional<Topico> topico = topicoRepository.findById(id);
-        if(topico.isPresent()){
-            return ResponseEntity.ok(topico.get());
-        }
-        return ResponseEntity.notFound().build();
+    public List<Topico> buscarPorId(@PathVariable Long id){
+        Curso curso = cursoRepository.findById(id).orElseThrow();
+        return curso.getTopicos();
     }
 
     @PostMapping
