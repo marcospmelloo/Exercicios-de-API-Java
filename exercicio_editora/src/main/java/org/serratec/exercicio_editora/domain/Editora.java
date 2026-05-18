@@ -1,5 +1,6 @@
 package org.serratec.exercicio_editora.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -26,6 +27,7 @@ public class Editora {
     private String cidade;
 
     @OneToMany(mappedBy = "editora")
+    @JsonManagedReference
     private List<Livro> livros;
 
     public Long getId() {

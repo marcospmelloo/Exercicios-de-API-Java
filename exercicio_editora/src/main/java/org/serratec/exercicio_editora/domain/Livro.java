@@ -1,5 +1,7 @@
 package org.serratec.exercicio_editora.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -24,7 +26,7 @@ public class Livro {
     @Column(name="isbn")
     private String isbn;
 
-    @Column(name="ano_publicacao")
+    @Column(name="anoPublicacao")
     private Integer anoPublicacao;
 
     @DecimalMin(value= "9.90", message = "O valor deve ser maior que R$9,90.")
@@ -33,9 +35,11 @@ public class Livro {
 
     @ManyToOne
     @JoinColumn(name = "id_editora")
+    @JsonBackReference
     private Editora editora;
 
     @OneToMany(mappedBy = "livro")
+    @JsonManagedReference
     private List<Avaliacao> avaliacoes;
 
     public Long getId() {

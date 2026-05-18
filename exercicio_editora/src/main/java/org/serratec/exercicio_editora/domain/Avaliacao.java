@@ -1,5 +1,6 @@
 package org.serratec.exercicio_editora.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -30,6 +31,7 @@ public class Avaliacao {
 
     @ManyToOne
     @JoinColumn(name = "id_livro")
+    @JsonBackReference
     private Livro livro;
 
     public Long getId() {
